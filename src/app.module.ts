@@ -3,6 +3,8 @@ import { TelegrafModule } from 'nestjs-telegraf';
 import { AppUpdate } from './app.update';
 import { AppService } from './app.service';
 import { sessionsMiddleware } from './middleware/sessions.middleware';
+import { UsersModule } from './modules/users/users.module';
+import { ContractsModule } from './modules/contracts/contracts.module';
 
 const { BOT_TOKEN: token } = process.env;
 @Module({
@@ -11,6 +13,8 @@ const { BOT_TOKEN: token } = process.env;
       middlewares: [sessionsMiddleware],
       token: token,
     }),
+    UsersModule,
+    ContractsModule,
   ],
   providers: [AppService, AppUpdate],
 })

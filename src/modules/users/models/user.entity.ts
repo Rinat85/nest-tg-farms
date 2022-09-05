@@ -1,16 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
+import { RolesEntity } from './roles.entity';
 
-@Entity()
-export class Users {
+@Entity({name: 'Users',})
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({type: 'varchar', unique: true})
   login: string;
 
-  @Column()
+  @Column({type: 'varchar', nullable: true})
   username: string;
 
-  @Column('int')
-  views: number;
+  @ManyToOne(() => RolesEntity, roles => roles.users)
+  @JoinColumn()
+  role: RolesEntity;
+
+  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  createdAt: Date;
 }

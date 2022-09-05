@@ -12,14 +12,14 @@ export class AppUpdate {
     private readonly appService: AppService,
   ) {}
 
-  @Start()
-  async startCommand(ctx: Context) {
-    await ctx.reply('Hi Friend!');
-    await ctx.reply('Choose the action:', actionButtons());
-  }
+  // @Start()
+  // async startCommand(ctx: Context) {
+  //   await ctx.reply('Hi Friend!');
+  //   await ctx.reply('Choose the action:', actionButtons());
+  // }
 
-  @Hears(['Добавить'])
-  async addToDb(ctx: Context) {
-    await ctx.reply('Hello!');
-  }
+  // @Hears(['Добавить'])
+  // async addToDb(ctx: Context) {
+  //   await ctx.reply('Hello!');
+  // }
 }

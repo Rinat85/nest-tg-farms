@@ -16,7 +16,7 @@ import { ContractsModule } from './modules/contracts/contracts.module';
       middlewares: [sessionsMiddleware],
       token: process.env.BOT_TOKEN,
     }),
-    TypeOrmModule.forRoot({ 
+    TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT),

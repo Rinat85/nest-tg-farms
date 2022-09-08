@@ -1,9 +1,5 @@
 import { UserRole } from 'src/interfaces/database.interface';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 // import { RolesEntity } from 'src/modules/roles/models/roles.entity';
 
 @Entity({ name: 'Users' })
@@ -30,8 +26,8 @@ export class UserEntity {
   // @JoinColumn({ name: 'roleId', referencedColumnName: 'id' })
   // role: RolesEntity;
 
-  @Column({ 
-    type: "enum",
+  @Column({
+    type: 'enum',
     enum: UserRole,
     default: UserRole.USER,
   })

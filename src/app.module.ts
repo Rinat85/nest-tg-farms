@@ -29,7 +29,7 @@ import { CoinsModule } from './modules/coins/coins.module';
     }),
     UsersModule,
     ContractsModule,
-    CoinsModule
+    CoinsModule,
   ],
   providers: [AppService, AppUpdate],
 })

@@ -14,16 +14,16 @@ export class UsersService {
   public getUsers(params?): Promise<IUser[]> {
     // const options = params ? {where: {...params}} : null;
     return this.userRepository.find({
-      where: {...params}
+      where: { ...params },
     });
   }
 
   public getUser(params): Promise<IUser> {
-    return this.userRepository.findOneBy({...params});
+    return this.userRepository.findOneBy({ ...params });
   }
 
   public createUser(user: IUser): Promise<IUser> {
-    const newUser =  this.userRepository.create({...user});
+    const newUser = this.userRepository.create({ ...user });
     return this.userRepository.save(newUser);
   }
 }

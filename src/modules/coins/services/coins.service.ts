@@ -16,16 +16,16 @@ export class CoinsService {
 
   public getCoins(params?): Promise<CoinEntity[]> {
     return this.coinsRepository.find({
-      where: {...params}
+      where: { ...params },
     });
   }
 
   public getCoin(params): Promise<CoinEntity> {
-    return this.coinsRepository.findOneBy({...params});
+    return this.coinsRepository.findOneBy({ ...params });
   }
 
   public createCoin(coin: ICoin): Promise<CoinEntity> {
-    const newCoin = this.coinsRepository.create({...coin});
+    const newCoin = this.coinsRepository.create({ ...coin });
     return this.coinsRepository.save(newCoin);
   }
 }

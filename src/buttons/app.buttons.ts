@@ -5,6 +5,6 @@ export function actionButtons() {
     ['💰 Добавить COIN', '❌ Удалить COIN'],
     ['📰 Добавить CONTRACT', '❌ Удалить CONTRACT'],
   ])
-    .resize()
-    .placeholder(`/add <Name> <contract_address>`);
+    .resize();
+    // .placeholder(`/add <Name> <contract_address>`);
 }

@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { sessionsMiddleware } from './middleware/sessions.middleware';
 import { UsersModule } from './modules/users/users.module';
 import { ContractsModule } from './modules/contracts/contracts.module';
+import { CoinsModule } from './modules/coins/coins.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ContractsModule } from './modules/contracts/contracts.module';
     }),
     UsersModule,
     ContractsModule,
+    CoinsModule
   ],
   providers: [AppService, AppUpdate],
 })

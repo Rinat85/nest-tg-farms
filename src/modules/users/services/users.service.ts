@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RolesService } from 'src/modules/roles/services/roles.service';
+import { IUser } from 'src/interfaces/user.interface';
 import { Repository } from 'typeorm/repository/Repository';
 import { UserEntity } from '../models/user.entity';
 
@@ -9,12 +9,21 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    @Inject(RolesService)
-    private readonly rolesService: RolesService,
   ) {}
 
-  public getUsers() {
-    return this.rolesService.getRoles();
-    // return this.userRepository.find();
+  public getUsers(params?): Promise<IUser[]> {
+    // const options = params ? {where: {...params}} : null;
+    return this.userRepository.find({
+      where: {...params}
+    });
+  }
+
+  public getUser(params): Promise<IUser> {
+    return this.userRepository.findOneBy({...params});
+  }
+
+  public createUser(user: IUser): Promise<IUser> {
+    const newUser =  this.userRepository.create({...user});
+    return this.userRepository.save(newUser);
   }
 }

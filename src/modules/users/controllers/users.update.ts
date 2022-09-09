@@ -37,10 +37,4 @@ export class UsersUpdate {
       await ctx.reply('Choose the action:', actionButtons());
     }
   }
-
-  @Hears('❌ Удалить COIN')
-  async deleteKeyboard(@Ctx() ctx: Context) {
-    console.log('CLICKED');
-    await ctx.reply('DEleted', Markup.removeKeyboard());
-  }
 }

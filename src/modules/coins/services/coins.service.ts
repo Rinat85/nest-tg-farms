@@ -28,4 +28,10 @@ export class CoinsService {
     const newCoin = this.coinsRepository.create({ ...coin });
     return this.coinsRepository.save(newCoin);
   }
+
+  public async deleteCoin(id: number) {
+    const coin = await this.getCoin({ id });
+    if (!coin) return null;
+    return this.coinsRepository.delete({ id });
+  }
 }

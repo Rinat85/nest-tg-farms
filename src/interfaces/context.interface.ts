@@ -2,6 +2,6 @@ import { Context as TelegrafContext } from 'telegraf';
 
 export interface Context extends TelegrafContext {
   session: {
-    type?: 'add' | 'remove' | 'addCoin';
+    type?: 'add' | 'remove' | 'addCoin' | 'deleteCoin' | 'addContract' | 'done';
   };
 }

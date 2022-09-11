@@ -1,6 +1,5 @@
 import { UserRole } from 'src/interfaces/database.interface';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-// import { RolesEntity } from 'src/modules/roles/models/roles.entity';
 
 @Entity({ name: 'Users' })
 export class UserEntity {
@@ -18,13 +17,6 @@ export class UserEntity {
 
   @Column({ type: 'varchar', nullable: true })
   lastName: string;
-
-  // @ManyToOne(() => RolesEntity, {
-  //   createForeignKeyConstraints: false,
-  //   lazy: true,
-  // })
-  // @JoinColumn({ name: 'roleId', referencedColumnName: 'id' })
-  // role: RolesEntity;
 
   @Column({
     type: 'enum',

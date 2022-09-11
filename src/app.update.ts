@@ -1,8 +1,7 @@
 import { InjectBot } from 'nestjs-telegraf';
-import { Hears, Start, Update } from 'nestjs-telegraf/dist/decorators';
+import { Update } from 'nestjs-telegraf/dist/decorators';
 import { Telegraf } from 'telegraf';
 import { AppService } from './app.service';
-import { actionButtons } from './buttons/app.buttons';
 import { Context } from './interfaces/context.interface';
 
 @Update()

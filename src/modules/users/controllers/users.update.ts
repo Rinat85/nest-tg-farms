@@ -1,16 +1,12 @@
-import { Ctx, Hears, InjectBot, Start, Update } from 'nestjs-telegraf';
+import { Ctx, Start, Update } from 'nestjs-telegraf';
 import { actionButtons } from 'src/buttons/app.buttons';
 import { Context } from 'src/interfaces/context.interface';
 import { IUser } from 'src/interfaces/user.interface';
-import { Markup, Telegraf } from 'telegraf';
 import { UsersService } from '../services/users.service';
 
 @Update()
 export class UsersUpdate {
-  constructor(
-    @InjectBot() private readonly bot: Telegraf<Context>,
-    private readonly usersService: UsersService,
-  ) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Start()
   async startCommand(@Ctx() ctx: Context) {
@@ -31,7 +27,6 @@ export class UsersUpdate {
     } else {
       const oldUser = await this.usersService.getUser(user.login);
       // const test = await this.usersService.getUsers();
-      // console.log(test);
       await ctx.reply(`Welcome back, ${oldUser.username}!`);
       // await ctx.reply('Пользователь существует');
       await ctx.reply('Choose the action:', actionButtons());

@@ -1,4 +1,5 @@
 import { Ctx, Hears, Update } from 'nestjs-telegraf';
+import { BUTTONS, CREATE_CONTRACT_SCENE_ID } from 'src/app.constants';
 import { Context } from 'src/interfaces/context.interface';
 import { ContractsService } from '../services/contracts.service';
 
@@ -6,12 +7,9 @@ import { ContractsService } from '../services/contracts.service';
 export class ContractsUpdate {
   constructor(private readonly contractsService: ContractsService) {}
 
-  @Hears('📰 Добавить CONTRACT')
+  @Hears(BUTTONS.contract.add)
   async createContract(@Ctx() ctx: Context) {
-    ctx.session.type = 'addContract';
-    await ctx.replyWithHTML(
-      'Введите данные в формате: \n <i>&#60;название&#62; &#60;адрес_монеты&#62;</i>',
-    );
+    await ctx.scene.enter(CREATE_CONTRACT_SCENE_ID);
   }
   
 }

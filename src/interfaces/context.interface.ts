@@ -1,7 +1,12 @@
-import { Context as TelegrafContext } from 'telegraf';
+import { Context as TelegrafContext, Scenes } from 'telegraf';
+
+interface MySession extends Scenes.SceneSession {
+	// will be available under `ctx.session.type`
+  type?: 'add' | 'remove' | 'addCoin' | 'deleteCoin' | 'addContract' | 'done';
+}
 
 export interface Context extends TelegrafContext {
-  session: {
-    type?: 'add' | 'remove' | 'addCoin' | 'deleteCoin' | 'addContract' | 'done';
-  };
+  session: MySession;
+  
+  scene: Scenes.SceneContextScene<Context>;
 }

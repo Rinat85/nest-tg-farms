@@ -1,11 +1,12 @@
+import { BUTTONS } from 'src/app.constants';
 import { ICoin } from 'src/interfaces/coin.interface';
 import { Markup } from 'telegraf';
-import { InlineKeyboardMarkup } from 'telegraf/typings/core/types/typegram';
+import { InlineKeyboardMarkup, ReplyKeyboardMarkup } from 'telegraf/typings/core/types/typegram';
+import * as _ from 'lodash';
 
-export function actionButtons() {
+export function homeButtons() {
   return Markup.keyboard([
-    ['💰 Добавить COIN', '❌ Удалить COIN'],
-    ['📰 Добавить CONTRACT', '❌ Удалить CONTRACT'],
+    [BUTTONS.coin.common, BUTTONS.contract.common],
   ]).resize();
   // .placeholder(`/add <Name> <contract_address>`);
 }
@@ -18,3 +19,9 @@ export function coinsButtons(
   );
   return Markup.inlineKeyboard(row, { columns: 3 });
 }
+
+export function renderKeyboard(keyboard: string[], columns: number): Markup.Markup<ReplyKeyboardMarkup> {
+  const row = _.chunk(keyboard, columns);
+  return Markup.keyboard(row).resize();
+}
+

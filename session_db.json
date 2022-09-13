@@ -3,8 +3,11 @@
     {
       "id": "434596325:434596325",
       "data": {
-        "__scenes": {},
-        "type": "deleteCoin"
+        "__scenes": {
+          "current": "DELETE_COIN_SCENE_ID",
+          "state": {}
+        },
+        "type": "addCoin"
       }
     },
     {

@@ -23,6 +23,7 @@ export class ContractEntity {
   @ManyToOne(() => CoinEntity, {
     createForeignKeyConstraints: false,
     lazy: true,
+    nullable: true,
   })
   @JoinColumn({ name: 'coinId', referencedColumnName: 'id' })
   coin: CoinEntity;

@@ -4,8 +4,10 @@
       "id": "434596325:434596325",
       "data": {
         "__scenes": {
-          "current": "DELETE_COIN_SCENE_ID",
-          "state": {}
+          "current": "ADD_CONTRACT_COMMAND_SCENE_ID",
+          "state": {
+            "command": "фывыфв"
+          }
         },
         "type": "addCoin"
       }

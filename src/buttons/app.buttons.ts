@@ -1,7 +1,10 @@
 import { BUTTONS } from 'src/app.constants';
 import { ICoin } from 'src/interfaces/coin.interface';
 import { Markup } from 'telegraf';
-import { InlineKeyboardMarkup, ReplyKeyboardMarkup } from 'telegraf/typings/core/types/typegram';
+import {
+  InlineKeyboardMarkup,
+  ReplyKeyboardMarkup,
+} from 'telegraf/typings/core/types/typegram';
 import * as _ from 'lodash';
 
 export function homeButtons() {
@@ -20,8 +23,10 @@ export function coinsButtons(
   return Markup.inlineKeyboard(row, { columns: 3 });
 }
 
-export function renderKeyboard(keyboard: string[], columns: number): Markup.Markup<ReplyKeyboardMarkup> {
+export function renderKeyboard(
+  keyboard: string[],
+  columns: number,
+): Markup.Markup<ReplyKeyboardMarkup> {
   const row = _.chunk(keyboard, columns);
   return Markup.keyboard(row).resize();
 }
-

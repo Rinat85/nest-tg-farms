@@ -9,7 +9,6 @@ export class DeleteContractScene {
 
   @SceneEnter()
   async onSceneEnter(ctx: Context): Promise<void> {
-    ctx.scene.session.state = {};
     await ctx.replyWithHTML(
       'Введите название для своей команды:\n(<i>только буквы и цифры латинского алфавита</i>)',
     );

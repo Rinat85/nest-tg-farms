@@ -22,15 +22,19 @@ export class ContractEntity {
 
   @ManyToOne(() => CoinEntity, {
     createForeignKeyConstraints: false,
-    lazy: true,
+    // lazy: true,
     nullable: true,
+    cascade: true,
+    onDelete: 'SET NULL'
   })
   @JoinColumn({ name: 'coinId', referencedColumnName: 'id' })
   coin: CoinEntity;
 
   @ManyToOne(() => UserEntity, {
     createForeignKeyConstraints: false,
-    lazy: true,
+    // lazy: true,
+    cascade: true,
+    onDelete: 'SET NULL'
   })
   @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
   user: UserEntity;

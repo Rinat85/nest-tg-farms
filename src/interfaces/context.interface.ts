@@ -1,16 +1,9 @@
 import { Context as TelegrafContext, Scenes } from 'telegraf';
+import { IContract } from './contract.interface';
 
 interface MySession extends Scenes.SceneSession {
   // will be available under `ctx.session.type`
-  type?: 'add' | 'remove' | 'addCoin' | 'deleteCoin' | 'addContract' | 'done';
-  state: {
-    contract?: {
-      address?: string;
-      command?: string;
-      coinId?: number;
-      userId?: number;
-    };
-  };
+  contract?: IContract;
 }
 
 export interface Context extends TelegrafContext {

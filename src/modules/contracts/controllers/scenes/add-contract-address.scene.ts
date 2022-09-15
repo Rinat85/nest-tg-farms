@@ -24,7 +24,6 @@ export class AddContractAddressScene {
 
   @SceneEnter()
   async onSceneEnter(ctx: Context): Promise<void> {
-    ctx.scene.session.state = {};
     await ctx.reply(
       'Введите адрес контракта',
       renderKeyboard([BUTTONS.common.prev, BUTTONS.common.returnToMainMenu], 1),
@@ -54,7 +53,7 @@ export class AddContractAddressScene {
         address: message,
       });
       if (!isExist) {
-        ctx.scene.session.state = { address: message };
+        ctx.session.contract = { ...ctx.session.contract, address: message };
         // ctx.session.state.contract = { ...ctx.session.state.contract, address: message };
         await ctx.reply(
           'Адрес сохранен ✅',

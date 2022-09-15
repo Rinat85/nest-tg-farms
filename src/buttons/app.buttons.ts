@@ -15,10 +15,11 @@ export function homeButtons() {
 }
 
 export function coinsButtons(
+  action: string,
   coins: ICoin[],
 ): Markup.Markup<InlineKeyboardMarkup> {
   const row = coins.map((coin) =>
-    Markup.button.callback(coin.name, `delete ${coin.id.toString()}`),
+    Markup.button.callback(coin.name, `${action} ${coin.id.toString()}`),
   );
   return Markup.inlineKeyboard(row, { columns: 3 });
 }

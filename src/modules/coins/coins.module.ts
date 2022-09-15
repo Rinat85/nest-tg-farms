@@ -11,6 +11,6 @@ import { CoinsService } from './services/coins.service';
 @Module({
   imports: [TypeOrmModule.forFeature([CoinEntity])],
   providers: [CoinsService, CoinScene, AddCoinScene, DeleteCoinScene],
-  // exports: [RolesService],
+  exports: [CoinsService],
 })
 export class CoinsModule {}

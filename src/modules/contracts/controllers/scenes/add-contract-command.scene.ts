@@ -53,8 +53,7 @@ export class AddContractCommandScene {
         command: message,
       });
       if (!isExist) {
-        ctx.scene.session.state = { command: message };
-        // ctx.session.state.contract = { ...ctx.session.state.contract, address: message };
+        ctx.session.contract = { ...ctx.session.contract, command: message };
         await ctx.reply(
           'Команда сохранена ✅',
           renderKeyboard(

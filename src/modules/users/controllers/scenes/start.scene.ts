@@ -19,7 +19,6 @@ export class StartScene {
 
   @SceneEnter()
   async onSceneEnter(ctx: Context): Promise<void> {
-    ctx.scene.session.state = {};
     let user: IUser = {
       login: ctx.from.id,
       username: ctx.from.username,
@@ -38,7 +37,7 @@ export class StartScene {
       await ctx.reply(`Welcome back, ${user.username}!`);
       // await ctx.reply('Пользователь существует');
     }
-    ctx.scene.session.state = { user };
+    ctx.scene.session.state = { ...ctx.scene.session.state, user };
     await ctx.reply(
       'Выберите действие:',
       renderKeyboard([BUTTONS.coin.common, BUTTONS.contract.common], 2),

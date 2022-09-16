@@ -5,7 +5,7 @@ export interface IContract {
   id?: number;
   address?: string;
   command?: string;
-  userId?: IUser;
-  coinId?: ICoin;
+  user?: IUser;
+  coin?: ICoin;
   createdAt?: Date;
 }

@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 
 import { CoinEntity } from 'src/modules/coins/models/coin.entity';
@@ -20,23 +21,29 @@ export class ContractEntity {
   @Column({ type: 'varchar', unique: true })
   command: string;
 
-  @ManyToOne(() => CoinEntity, {
-    createForeignKeyConstraints: false,
+  @ManyToOne(() => CoinEntity, coin => coin.id, {
+    // createForeignKeyConstraints: false,
     // lazy: true,
     nullable: true,
     cascade: true,
+    eager: true,
     onDelete: 'SET NULL'
   })
-  @JoinColumn({ name: 'coinId', referencedColumnName: 'id' })
+  @JoinColumn({
+    name: 'coin',
+  })
   coin: CoinEntity;
 
-  @ManyToOne(() => UserEntity, {
-    createForeignKeyConstraints: false,
+  @ManyToOne(() => UserEntity, user => user.id, {
+    // createForeignKeyConstraints: false,
     // lazy: true,
     cascade: true,
+    // eager: true,
     onDelete: 'SET NULL'
   })
-  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
+  @JoinColumn({ 
+    name: 'user'
+  })
   user: UserEntity;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

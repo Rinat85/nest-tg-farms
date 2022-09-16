@@ -4,14 +4,29 @@
       "id": "434596325:434596325",
       "data": {
         "__scenes": {
-          "current": "ADD_CONTRACT_COIN_SCENE_ID",
-          "state": {}
+          "current": "START_SCENE_ID",
+          "state": {
+            "user": {
+              "id": 1,
+              "login": "434596325",
+              "username": "Web_dev_85",
+              "firstName": "Web Dev",
+              "lastName": "85",
+              "role": "user",
+              "createdAt": "2022-09-08T10:43:08.549Z"
+            }
+          }
         },
         "type": "addCoin",
         "contract": {
-          "address": "0x5C8db49769d3EE818f896E14373D586a2761b12A",
-          "command": "qwewe",
+          "address": "0x9686b3BfBc0d0467e5282E7011dBfD09511750fD",
+          "command": "asdsad",
           "coinId": {
+            "id": 6,
+            "name": "busd",
+            "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+          },
+          "coin": {
             "id": 6,
             "name": "busd",
             "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56"

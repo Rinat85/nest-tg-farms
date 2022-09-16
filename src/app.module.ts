@@ -10,6 +10,9 @@ import { sessionsMiddleware } from './middleware/sessions.middleware';
 import { UsersModule } from './modules/users/users.module';
 import { ContractsModule } from './modules/contracts/contracts.module';
 import { CoinsModule } from './modules/coins/coins.module';
+import { CoinEntity } from './modules/coins/models/coin.entity';
+import { UserEntity } from './modules/users/models/user.entity';
+import { ContractEntity } from './modules/contracts/models/contract.entity';
 
 @Module({
   imports: [
@@ -28,6 +31,7 @@ import { CoinsModule } from './modules/coins/coins.module';
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([CoinEntity, UserEntity, ContractEntity]),
     UsersModule,
     ContractsModule,
     CoinsModule,

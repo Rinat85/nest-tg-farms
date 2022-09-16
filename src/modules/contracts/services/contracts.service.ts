@@ -24,6 +24,7 @@ export class ContractsService {
 
   public createContract(contract: IContract): Promise<ContractEntity> {
     const newContract = this.contractsRepository.create({ ...contract });
+    console.log('CONTRACT CREATED', newContract);
     return this.contractsRepository.save(newContract);
   }
 

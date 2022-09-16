@@ -10,6 +10,7 @@ import {
     ADD_CONTRACT_COIN_SCENE_ID,
     ADD_CONTRACT_COMMAND_SCENE_ID,
     BUTTONS,
+    START_SCENE_ID,
 } from 'src/app.constants';
 import { coinsButtons, renderKeyboard } from 'src/buttons/app.buttons';
 import { Context } from 'src/interfaces/context.interface';
@@ -62,12 +63,16 @@ export class AddContractCoinScene {
     async onEndContractCreation(@Ctx() ctx: Context) {
         const user = await this.usersService.getUser({login: ctx.from.id});
         console.log(user);
-        const contract = {...ctx.session.contract, userId: user};
+        const contract = {...ctx.session.contract, user: user};
         try {
             console.log('check this', contract);
-            await this.contractsService.createContract(contract);
+            const isCreated = await this.contractsService.createContract(contract);
+            if (isCreated) {
+                await ctx.reply('✅ Контракт создан успешно.');
+                await ctx.scene.enter(START_SCENE_ID);
+            } 
         } catch (error) {
-            await ctx.reply(error);
+            await ctx.reply(error.detail);
         }
     }
 
@@ -76,7 +81,7 @@ export class AddContractCoinScene {
         const actionData = await ctx.callbackQuery.data;
         const coinId = actionData.split(' ')[1];
         const coin = await this.coinsService.getCoin({id: coinId});
-        ctx.session.contract = { ...ctx.session.contract, coinId: coin };
+        ctx.session.contract = { ...ctx.session.contract, coin: coin };
         await ctx.reply('Монета сохранена! ✅');
         console.log(ctx.session.contract);
     }

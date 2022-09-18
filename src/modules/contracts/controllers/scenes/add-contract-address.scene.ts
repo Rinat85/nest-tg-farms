@@ -12,6 +12,7 @@ import {
   ADD_CONTRACT_COMMAND_SCENE_ID,
   BUTTONS,
   CONTRACT_SCENE_ID,
+  START_SCENE_ID,
 } from 'src/app.constants';
 import { renderKeyboard } from 'src/buttons/app.buttons';
 import { Context } from 'src/interfaces/context.interface';
@@ -56,7 +57,7 @@ export class AddContractAddressScene {
         ctx.session.contract = { ...ctx.session.contract, address: message };
         // ctx.session.state.contract = { ...ctx.session.state.contract, address: message };
         await ctx.reply(
-          'Адрес сохранен ✅',
+          `Адрес сохранен ✅. Нажмите кнопку "${BUTTONS.common.next}"`,
           renderKeyboard(
             [
               BUTTONS.common.prev,
@@ -69,6 +70,8 @@ export class AddContractAddressScene {
       } else {
         await ctx.reply('⛔Контракт с таким адресом уже добавлен!');
       }
+    } else if (message === BUTTONS.common.returnToMainMenu) {
+      ctx.scene.enter(START_SCENE_ID);
     } else {
       await ctx.reply('⛔Введите валидный адрес!');
     }

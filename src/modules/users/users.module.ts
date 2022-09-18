@@ -7,6 +7,6 @@ import { StartScene } from './controllers/scenes/start.scene';
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   providers: [UsersService, StartScene],
-  exports: [UsersService]
+  exports: [UsersService],
 })
 export class UsersModule {}

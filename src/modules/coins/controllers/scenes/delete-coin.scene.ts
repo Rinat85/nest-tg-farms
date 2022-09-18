@@ -33,7 +33,10 @@ export class DeleteCoinScene {
     if (!coins) {
       await ctx.reply('❗ Нет монет для удаления.');
     } else {
-      await ctx.reply('💰 Список добавленных монет: 👇', coinsButtons('delete', coins));
+      await ctx.reply(
+        '💰 Список добавленных монет: 👇',
+        coinsButtons('delete', coins),
+      );
     }
   }
 

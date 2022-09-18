@@ -1,4 +1,11 @@
-import { Scene, SceneEnter, SceneLeave, Ctx, Hears } from 'nestjs-telegraf';
+import {
+  Scene,
+  SceneEnter,
+  SceneLeave,
+  Ctx,
+  Hears,
+  Message,
+} from 'nestjs-telegraf';
 import {
   BUTTONS,
   COIN_SCENE_ID,
@@ -8,6 +15,8 @@ import {
 import { renderKeyboard } from 'src/buttons/app.buttons';
 import { Context } from 'src/interfaces/context.interface';
 import { IUser } from 'src/interfaces/user.interface';
+import { commandRegExp } from 'src/utils/validation.util';
+// import { Message as MessageTelegraf } from 'telegraf/typings/core/types/typegram';
 // import { Scenes } from 'telegraf';
 import { UsersService } from '../../services/users.service';
 
@@ -58,5 +67,14 @@ export class StartScene {
   @Hears(BUTTONS.contract.common)
   async onContractScene(@Ctx() ctx: Context) {
     await ctx.scene.enter(CONTRACT_SCENE_ID);
+  }
+
+  @Hears(commandRegExp)
+  async onUseContractCommand(
+    @Ctx() ctx: Context,
+    @Message('text') message: string,
+  ) {
+    // const command = await this.
+    console.log('test >>', message);
   }
 }

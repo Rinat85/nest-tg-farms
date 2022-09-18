@@ -15,7 +15,7 @@ import {
 } from 'src/app.constants';
 import { renderKeyboard } from 'src/buttons/app.buttons';
 import { Context } from 'src/interfaces/context.interface';
-import { isCommand } from 'src/utils/validation.util';
+import { isCommandSet } from 'src/utils/validation.util';
 import { ContractsService } from '../../services/contracts.service';
 
 @Scene(ADD_CONTRACT_COMMAND_SCENE_ID)
@@ -24,6 +24,9 @@ export class AddContractCommandScene {
 
   @SceneEnter()
   async onSceneEnter(ctx: Context): Promise<void> {
+    if (ctx.session.contract.coin) {
+      ctx.session.contract.coin = null;
+    }
     await ctx.reply(
       'Придумайте название команды для контракта.\nКоманда должна быть написана только буквами латинского алфавита и не иметь знак "/".',
       renderKeyboard([BUTTONS.common.prev, BUTTONS.common.returnToMainMenu], 1),
@@ -47,7 +50,7 @@ export class AddContractCommandScene {
 
   @On('text')
   async getMessage(@Message('text') message: string, @Ctx() ctx: Context) {
-    const isValidCommand = isCommand(message);
+    const isValidCommand = isCommandSet(message);
     if (isValidCommand) {
       const isExist = await this.contractsService.getContract({
         command: message,
@@ -55,7 +58,7 @@ export class AddContractCommandScene {
       if (!isExist) {
         ctx.session.contract = { ...ctx.session.contract, command: message };
         await ctx.reply(
-          'Команда сохранена ✅',
+          `Команда сохранена ✅. Нажмите кнопку "${BUTTONS.common.next}"`,
           renderKeyboard(
             [
               BUTTONS.common.prev,

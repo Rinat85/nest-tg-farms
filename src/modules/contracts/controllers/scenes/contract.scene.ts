@@ -12,7 +12,7 @@ import { Context } from 'src/interfaces/context.interface';
 export class ContractScene {
   @SceneEnter()
   async onSceneEnter(ctx: Context): Promise<void> {
-    //   ctx.scene.session.state = {};
+    ctx.session.contract = {};
     await ctx.reply(
       'Выберите действие:',
       renderKeyboard(

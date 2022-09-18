@@ -21,28 +21,28 @@ export class ContractEntity {
   @Column({ type: 'varchar', unique: true })
   command: string;
 
-  @ManyToOne(() => CoinEntity, coin => coin.id, {
+  @ManyToOne(() => CoinEntity, (coin) => coin.id, {
     // createForeignKeyConstraints: false,
     // lazy: true,
     nullable: true,
     cascade: true,
     eager: true,
-    onDelete: 'SET NULL'
+    onDelete: 'SET NULL',
   })
   @JoinColumn({
     name: 'coin',
   })
   coin: CoinEntity;
 
-  @ManyToOne(() => UserEntity, user => user.id, {
+  @ManyToOne(() => UserEntity, (user) => user.id, {
     // createForeignKeyConstraints: false,
     // lazy: true,
     cascade: true,
     // eager: true,
-    onDelete: 'SET NULL'
+    onDelete: 'SET NULL',
   })
-  @JoinColumn({ 
-    name: 'user'
+  @JoinColumn({
+    name: 'user',
   })
   user: UserEntity;
 

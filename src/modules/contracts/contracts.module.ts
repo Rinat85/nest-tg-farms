@@ -12,16 +12,16 @@ import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ContractEntity]), 
-    CoinsModule, 
-    UsersModule
+    TypeOrmModule.forFeature([ContractEntity]),
+    CoinsModule,
+    UsersModule,
   ],
   providers: [
     ContractsService,
     ContractScene,
     AddContractAddressScene,
     AddContractCommandScene,
-    AddContractCoinScene
+    AddContractCoinScene,
   ],
 })
 export class ContractsModule {}

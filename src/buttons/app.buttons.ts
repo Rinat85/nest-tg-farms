@@ -6,6 +6,7 @@ import {
   ReplyKeyboardMarkup,
 } from 'telegraf/typings/core/types/typegram';
 import * as _ from 'lodash';
+import { IContract } from 'src/interfaces/contract.interface';
 
 export function homeButtons() {
   return Markup.keyboard([
@@ -20,6 +21,19 @@ export function coinsButtons(
 ): Markup.Markup<InlineKeyboardMarkup> {
   const row = coins.map((coin) =>
     Markup.button.callback(coin.name, `${action} ${coin.id.toString()}`),
+  );
+  return Markup.inlineKeyboard(row, { columns: 3 });
+}
+
+export function contractsButtons(
+  action: string,
+  contracts: IContract[],
+): Markup.Markup<InlineKeyboardMarkup> {
+  const row = contracts.map((contract) =>
+    Markup.button.callback(
+      contract.command,
+      `${action} ${contract.id.toString()}`,
+    ),
   );
   return Markup.inlineKeyboard(row, { columns: 3 });
 }

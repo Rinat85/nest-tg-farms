@@ -6,6 +6,7 @@ import {
   Hears,
   Message,
 } from 'nestjs-telegraf';
+
 import {
   BUTTONS,
   COIN_SCENE_ID,
@@ -15,7 +16,9 @@ import {
 import { renderKeyboard } from 'src/buttons/app.buttons';
 import { Context } from 'src/interfaces/context.interface';
 import { IUser } from 'src/interfaces/user.interface';
+import { ContractsService } from 'src/modules/contracts/services/contracts.service';
 import { commandRegExp } from 'src/utils/validation.util';
+import { TvlService } from '../../services/tvl.service';
 // import { Message as MessageTelegraf } from 'telegraf/typings/core/types/typegram';
 // import { Scenes } from 'telegraf';
 import { UsersService } from '../../services/users.service';
@@ -24,7 +27,11 @@ import { UsersService } from '../../services/users.service';
 
 @Scene(START_SCENE_ID)
 export class StartScene {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly contractsService: ContractsService,
+    private readonly tvlService: TvlService,
+  ) {}
 
   @SceneEnter()
   async onSceneEnter(ctx: Context): Promise<void> {
@@ -76,5 +83,23 @@ export class StartScene {
   ) {
     // const command = await this.
     console.log('test >>', message);
+    const [slash, command] = message.split('/');
+    if (command) {
+      const contract = await this.contractsService.getContract({ command });
+      if (contract) {
+        // console.log('contract >>', contract);
+        const contractAddress = contract.address;
+        const coinAddress = contract.coin.address;
+
+        console.log('contractAddress >>', contractAddress);
+        console.log('coinAddress >>', coinAddress);
+        const test = await this.tvlService.getTvl(contractAddress, coinAddress);
+        // console.log('TVL >>', test);
+      } else {
+        await ctx.reply('🚨 Такая команда не задана!');
+      }
+    }
+    // console.log('1 >>', slash);
+    // console.log('2 >>', command);
   }
 }

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ContractsService } from './services/contracts.service';
@@ -9,12 +9,13 @@ import { AddContractCommandScene } from './controllers/scenes/add-contract-comma
 import { AddContractCoinScene } from './controllers/scenes/add-contract-coin.scene';
 import { CoinsModule } from '../coins/coins.module';
 import { UsersModule } from '../users/users.module';
+import { DeleteContractScene } from './controllers/scenes/delete-contract.scene';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([ContractEntity]),
     CoinsModule,
-    UsersModule,
+    forwardRef(() => UsersModule),
   ],
   providers: [
     ContractsService,
@@ -22,6 +23,8 @@ import { UsersModule } from '../users/users.module';
     AddContractAddressScene,
     AddContractCommandScene,
     AddContractCoinScene,
+    DeleteContractScene,
   ],
+  exports: [ContractsService],
 })
 export class ContractsModule {}

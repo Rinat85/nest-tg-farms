@@ -13,15 +13,12 @@
               "firstName": "Web Dev",
               "lastName": "85",
               "role": "user",
-              "createdAt": "2022-09-08T18:07:45.952Z"
+              "createdAt": "2022-09-08T10:43:08.549Z"
             }
           }
         },
         "type": "addCoin",
-        "contract": {
-          "address": "0x9686b3BfBc0d0467e5282E7011dBfD09511750fF",
-          "command": "checkv1"
-        }
+        "contract": {}
       }
     },
     {

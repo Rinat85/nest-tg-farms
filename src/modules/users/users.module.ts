@@ -21,7 +21,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         params: {
           module: 'account',
           apikey: configService.get('BSCSCAN_TOKEN'),
-        }, 
+        },
       }),
       inject: [ConfigService],
     }),

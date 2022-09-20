@@ -82,24 +82,54 @@ export class StartScene {
     @Message('text') message: string,
   ) {
     // const command = await this.
-    console.log('test >>', message);
+    // console.log('test >>', message);
     const [slash, command] = message.split('/');
-    if (command) {
+    if (command === 'start') {
+      await ctx.scene.enter(START_SCENE_ID);
+    } else {
       const contract = await this.contractsService.getContract({ command });
       if (contract) {
-        // console.log('contract >>', contract);
+        console.log('contract >>', contract);
         const contractAddress = contract.address;
-        const coinAddress = contract.coin.address;
+        const coinAddress = contract.coin?.address;
 
-        console.log('contractAddress >>', contractAddress);
-        console.log('coinAddress >>', coinAddress);
-        const test = await this.tvlService.getTvl(contractAddress, coinAddress);
-        // console.log('TVL >>', test);
+        // console.log('contractAddress >>', contractAddress);
+        // console.log('coinAddress >>', coinAddress);
+        if (coinAddress) {
+          try {
+            const response = await this.tvlService.getTvl(
+              contractAddress,
+              coinAddress,
+            );
+            const res = response.data.result;
+            const allRes = res.slice(0, -16);
+            const unit = allRes.slice(0, -2);
+            const part = allRes.substr(-2, 2);
+            // console.log(typeof res);
+            const formatedData = `<b>${contract.coin.name.toLocaleUpperCase()}</b>: 🎯${unit},${part}`;
+            await ctx.replyWithHTML(formatedData);
+          } catch (error) {
+            await ctx.reply('🚨 Ошибка сервера bscscan!');
+          }
+        } else {
+          try {
+            const response = await this.tvlService.getTvlWhereBnb(
+              contractAddress,
+            );
+            const res = response.data.result;
+            const allRes = res.slice(0, -16);
+            const unit = allRes.slice(0, -2);
+            const part = allRes.substr(-2, 2);
+            // console.log(typeof res);
+            const formatedData = `<b>BNB</b>: 🎯${unit},${part}`;
+            await ctx.replyWithHTML(formatedData);
+          } catch (error) {
+            await ctx.reply('🚨 Ошибка сервера bscscan!');
+          }
+        }
       } else {
         await ctx.reply('🚨 Такая команда не задана!');
       }
     }
-    // console.log('1 >>', slash);
-    // console.log('2 >>', command);
   }
 }

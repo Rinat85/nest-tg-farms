@@ -18,19 +18,83 @@
           }
         },
         "type": "addCoin",
-        "contract": {}
+        "contract": {
+          "address": "0x9c4F645fDa5927EBA4bC4559fea7dfE0BE82e604",
+          "command": "cherries"
+        }
       }
     },
     {
       "id": "-773486627:434596325",
       "data": {
-        "__scenes": {}
+        "__scenes": {
+          "current": "START_SCENE_ID",
+          "state": {
+            "user": {
+              "id": 1,
+              "login": "434596325",
+              "username": "Web_dev_85",
+              "firstName": "Web Dev",
+              "lastName": "85",
+              "role": "user",
+              "createdAt": "2022-09-08T10:43:08.549Z"
+            }
+          }
+        },
+        "contract": {}
       }
     },
     {
       "id": "106019127:106019127",
       "data": {
         "__scenes": {}
+      }
+    },
+    {
+      "id": "-515170711:434596325",
+      "data": {
+        "__scenes": {
+          "current": "START_SCENE_ID",
+          "state": {
+            "user": {
+              "id": 1,
+              "login": "434596325",
+              "username": "Web_dev_85",
+              "firstName": "Web Dev",
+              "lastName": "85",
+              "role": "user",
+              "createdAt": "2022-09-08T10:43:08.549Z"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "211721418:211721418",
+      "data": {
+        "__scenes": {
+          "current": "START_SCENE_ID",
+          "state": {
+            "user": {
+              "id": 1,
+              "login": "434596325",
+              "username": "Web_dev_85",
+              "firstName": "Web Dev",
+              "lastName": "85",
+              "role": "user",
+              "createdAt": "2022-09-08T10:43:08.549Z"
+            }
+          }
+        },
+        "contract": {
+          "address": "0x2C9EFD93F0BA66E15aaa6974bd81ac8D7A3d1e7C",
+          "command": "digger",
+          "coin": {
+            "id": 6,
+            "name": "busd",
+            "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+          }
+        }
       }
     }
   ]

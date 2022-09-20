@@ -3,35 +3,41 @@ import { HttpService } from '@nestjs/axios';
 import { map, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
 
-
 @Injectable()
 export class TvlService {
-  constructor(
-    private readonly httpService: HttpService,
-  ) {}
+  constructor(private readonly httpService: HttpService) {}
 
-  public getTvl(contractAddress: string, coinAddress: string): Observable<AxiosResponse> {
+  public getTvl(
+    contractAddress: string,
+    coinAddress: string,
+  ): Promise<AxiosResponse<any>> {
     const params = {
-        action: 'tokenbalance',
-        tag: 'latest',
+      action: 'tokenbalance',
+      tag: 'latest',
     };
-    const testurl = this.httpService
-        .get('/api', {
-            params: {
-                ...params,
-                contractaddress: coinAddress,
-                address: contractAddress,
-            }
-        })
-        .pipe(
-            map(response => response.data),
-        );
-    // console.log('baseurl >>>', process.env.AXIOS_BSCSCAN_BASE_URI);
-    console.log(testurl);
-    return testurl;
+    return this.httpService.axiosRef.get('/api', {
+      params: {
+        ...params,
+        contractaddress: coinAddress,
+        address: contractAddress,
+      },
+    });
   }
 
-//   public getUser(params): Promise<IUser> {
-//     return this.userRepository.findOneBy({ ...params });
-//   }
+  public getTvlWhereBnb(contractAddress: string): Promise<AxiosResponse<any>> {
+    const params = {
+      action: 'balance',
+      tag: 'latest',
+    };
+    return this.httpService.axiosRef.get('/api', {
+      params: {
+        ...params,
+        // contractaddress: coinAddress,
+        address: contractAddress,
+      },
+    });
+  }
+  //   public getUser(params): Promise<IUser> {
+  //     return this.userRepository.findOneBy({ ...params });
+  //   }
 }

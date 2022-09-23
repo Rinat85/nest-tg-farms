@@ -18,6 +18,7 @@ import { Context } from 'src/interfaces/context.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { ContractsService } from 'src/modules/contracts/services/contracts.service';
 import { commandRegExp } from 'src/utils/validation.util';
+import { Markup } from 'telegraf';
 import { TvlService } from '../../services/tvl.service';
 // import { Message as MessageTelegraf } from 'telegraf/typings/core/types/typegram';
 // import { Scenes } from 'telegraf';
@@ -43,7 +44,7 @@ export class StartScene {
     };
 
     const isUserExist = await this.usersService.getUser(user);
-
+    console.log('CHAT ID >>', ctx.chat.id);
     if (!isUserExist) {
       user = await this.usersService.createUser(user);
       await ctx.reply(`Welcome, ${user.username}!`);
@@ -54,7 +55,8 @@ export class StartScene {
       // await ctx.reply('Пользователь существует');
     }
     ctx.scene.session.state = { ...ctx.scene.session.state, user };
-    await ctx.reply(
+    await ctx.telegram.sendMessage(
+      ctx.chat.id,
       'Выберите действие:',
       renderKeyboard([BUTTONS.coin.common, BUTTONS.contract.common], 2),
     );
@@ -68,11 +70,13 @@ export class StartScene {
 
   @Hears(BUTTONS.coin.common)
   async onCoinScene(@Ctx() ctx: Context) {
+    await Markup.removeKeyboard();
     await ctx.scene.enter(COIN_SCENE_ID);
   }
 
   @Hears(BUTTONS.contract.common)
   async onContractScene(@Ctx() ctx: Context) {
+    await Markup.removeKeyboard();
     await ctx.scene.enter(CONTRACT_SCENE_ID);
   }
 
@@ -89,7 +93,7 @@ export class StartScene {
     } else {
       const contract = await this.contractsService.getContract({ command });
       if (contract) {
-        console.log('contract >>', contract);
+        // console.log('contract >>', contract);
         const contractAddress = contract.address;
         const coinAddress = contract.coin?.address;
 

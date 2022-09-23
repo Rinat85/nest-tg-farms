@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TelegrafModule } from 'nestjs-telegraf';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 
@@ -21,15 +21,19 @@ import { ContractEntity } from './modules/contracts/models/contract.entity';
       middlewares: [sessionsMiddleware],
       token: process.env.BOT_TOKEN,
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get('DB_HOST'),
+        port: +configService.get('DB_PORT'),
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_NAME'),
+        entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([CoinEntity, UserEntity, ContractEntity]),
     UsersModule,

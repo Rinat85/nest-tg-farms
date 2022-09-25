@@ -17,9 +17,13 @@ import { ContractEntity } from './modules/contracts/models/contract.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TelegrafModule.forRoot({
-      middlewares: [sessionsMiddleware],
-      token: process.env.BOT_TOKEN,
+    TelegrafModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        middlewares: [sessionsMiddleware],
+        token: configService.get('BOT_TOKEN'),
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

@@ -4,18 +4,8 @@
       "id": "434596325:434596325",
       "data": {
         "__scenes": {
-          "current": "START_SCENE_ID",
-          "state": {
-            "user": {
-              "id": 1,
-              "login": "434596325",
-              "username": "Web_dev_85",
-              "firstName": "Web Dev",
-              "lastName": "85",
-              "role": "user",
-              "createdAt": "2022-09-08T18:07:45.952Z"
-            }
-          }
+          "current": "COIN_SCENE_ID",
+          "state": {}
         },
         "type": "addCoin",
         "contract": {}

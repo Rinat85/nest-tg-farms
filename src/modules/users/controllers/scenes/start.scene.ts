@@ -90,6 +90,12 @@ export class StartScene {
     const [slash, command] = message.split('/');
     if (command === 'start') {
       await ctx.scene.enter(START_SCENE_ID);
+    } else if (command === 'stop') {
+      await ctx.telegram.sendMessage(
+        ctx.chat.id,
+        'Клавиатура удалена.',
+        Markup.removeKeyboard(),
+      );
     } else {
       const contract = await this.contractsService.getContract({ command });
       if (contract) {
